@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>For You</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- ========================= -->
+    <!-- OPENING VIDEO -->
+    <!-- ========================= -->
+
+    <section class="opening">
+      <video autoplay muted playsinline>
+        <source
+          src="WhatsApp Video 2026-10-03 at 23.39.56.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      <div class="opening-overlay"></div>
+
+      <div class="opening-text">
+        <p>Three months, countless moments</p>
+        <h1>and a story that wasn't always easy.</h1>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- MAIN WEBSITE -->
+    <!-- ========================= -->
+
+    <main class="main-content">
+      <!-- FOTO 1 -->
+      <section class="scene">
+        <img src="foto0.jpeg" alt="Foto 1" />
+
+        <div class="caption">
+          <p>Chapter 01</p>
+          <h1>It started simply. Two people, getting to know each other.</h1>
+        </div>
+      </section>
+
+      <!-- FOTO 2 -->
+      <section class="scene">
+        <img src="foto1.jpeg" alt="Foto 2" />
+
+        <div class="caption">
+          <p>Chapter 02</p>
+          <h1>Somewhere along the way, we stopped being strangers.</h1>
+        </div>
+      </section>
+
+      <!-- FOTO 3 -->
+      <section class="scene">
+        <img src="foto2.jpeg" alt="Foto 3" />
+
+        <div class="caption">
+          <p>Chapter 03</p>
+          <h1>Then came the days that weren't as simple as the beginning.</h1>
+        </div>
+      </section>
+
+      <!-- FOTO 4 -->
+      <section class="scene">
+        <img src="foto3.jpeg" alt="Foto 4" />
+
+        <div class="caption">
+          <p>Chapter 04</p>
+          <h1>We laughed, we argued, we misunderstood each other, and sometimes, we didn't know what to do next.</h1>
+        </div>
+      </section>
+
+      <!-- FOTO 5 -->
+      <section class="scene">
+        <img src="foto4.jpeg" alt="Foto 5" />
+
+        <div class="caption">
+          <p>Chapter 05</p>
+          <h1>But somehow, through all the complicated parts, we kept finding our way back to each other.</h1>
+        </div>
+      </section>
+
+      <!-- GIF / MOMENT -->
+      <section class="scene moment">
+        <video autoplay muted loop playsinline>
+          <source src="gif.mp4" type="video/mp4" />
+        </video>
+
+        <div class="caption">
+          <p>THREE MONTHS</p>
+          <h1>Not perfect. Not always easy. But real.</h1>
+        </div>
+      </section>
+
+      <!-- ENDING -->
+      <section class="ending">
+        <div>
+          <p>Three months may not be a long time.</p>
+
+          <h1>
+            But somehow, you've become a part of a chapter I'll always remember.<br />
+            Whatever comes next, I'm grateful for these three months.
+          </h1>
+
+          <span>♡</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- MUSIC -->
+
+    <audio id="bgm" loop preload="auto">
+      <source
+        src="Perunggu - Berhasil (Official Lyric Video).mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <script>
+      const openingVideo = document.querySelector(".opening video");
+      const opening = document.querySelector(".opening");
+      const mainContent = document.querySelector(".main-content");
+      const bgm = document.getElementById("bgm");
+
+      function playBgm() {
+        if (!bgm) return;
+        bgm.volume = 0.55;
+        bgm.currentTime = 0;
+        bgm.play().catch(() => {});
+      }
+
+      function syncOpeningTiming() {
+        if (!openingVideo || !opening || !mainContent) return;
+
+        const duration = Number(openingVideo.duration);
+
+        if (Number.isFinite(duration) && duration > 0) {
+          opening.style.setProperty("--opening-delay", `${duration}s`);
+          mainContent.style.setProperty(
+            "--main-delay",
+            `${Math.max(duration - 0.5, 0.5)}s`,
+          );
+        }
+      }
+
+      if (openingVideo) {
+        openingVideo.addEventListener("loadedmetadata", syncOpeningTiming);
+        openingVideo.addEventListener("canplay", () => {
+          syncOpeningTiming();
+          playBgm();
+        });
+      }
+
+      document.addEventListener("pointerdown", playBgm, { once: true });
+      document.addEventListener("keydown", playBgm, { once: true });
+      window.addEventListener("load", () => {
+        setTimeout(playBgm, 150);
+      });
+    </script>
+  </body>
+</html>
